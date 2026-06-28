@@ -81,7 +81,7 @@ Text to analyze:
 ${text.substring(0, 100000)} // Truncating to avoid huge token counts if necessary
 `;
 
-     const response = await gemini.models.generateContent({
+     const response = await gemini.models.console.log("Sending request to Gemini...");generateContent({console.log("Gemini responded");
   model: "gemini-2.5-pro",
   contents: prompt,
   config: {
