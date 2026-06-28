@@ -81,18 +81,36 @@ Text to analyze:
 ${text.substring(0, 100000)} // Truncating to avoid huge token counts if necessary
 `;
 
-      const response = await gemini.models.generateContent({
-        model: "gemini-2.5-pro",
-        contents: prompt,
-        config: {
-            responseMimeType: "application/json",
-        },
-      });
+     const response = await gemini.models.generateContent({
+  model: "gemini-2.5-pro",
+  contents: prompt,
+  config: {
+    responseMimeType: "application/json",
+  },
+});
 
-      const resultText = response.text || "{}";
-      const result = JSON.parse(resultText);
+let resultText = response.text ?? "";
 
-      res.json(result);
+// Bersihkan markdown jika ada
+resultText = resultText
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim();
+
+console.log("Gemini Response:");
+console.log(resultText);
+
+try {
+  const result = JSON.parse(resultText);
+  res.json(result);
+} catch (err) {
+  console.error("Invalid JSON from Gemini:");
+  console.log(resultText);
+
+  res.status(500).json({
+    error: "Gemini returned invalid JSON",
+  });
+}
     } catch (error: any) {
       console.error("Analysis error:", error);
       res.status(500).json({ error: error.message });
