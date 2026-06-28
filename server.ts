@@ -32,20 +32,26 @@ async function startServer() {
 
   // API route: Extract text from PDF
   app.post("/api/extract-pdf", upload.single("file"), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-      }
-
-      const data = await pdfParse(buffer);
-      const text = pdfData.text;
-
-      res.json({ text });
-    } catch (error: any) {
-      console.error("PDF Extraction error:", error);
-      res.status(500).json({ error: error.message });
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        error: "No file uploaded",
+      });
     }
-  });
+
+    const text = await extractPdfText(req.file.buffer);
+
+    res.json({
+      text,
+    });
+  } catch (error: any) {
+    console.error("PDF Extraction error:", error);
+
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+});
 
   // API route: Call Gemini API to extract research structure
   app.post("/api/analyze-thesis", async (req, res) => {
