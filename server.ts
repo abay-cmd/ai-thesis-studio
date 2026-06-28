@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import multer from "multer";
 // @ts-ignore
-import * as pdfParse from "pdf-parse";
+import pdfParse from "pdf-parse";
 import { GoogleGenAI } from "@google/genai";
 import { createServer as createViteServer } from "vite";
 import fs from "fs/promises";
