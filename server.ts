@@ -82,7 +82,7 @@ ${text.substring(0, 100000)} // Truncating to avoid huge token counts if necessa
 `;
 
      const response = await gemini.models.console.log("Sending request to Gemini...");generateContent({console.log("Gemini responded");
-  model: "gemini-2.5-pro",
+  model: "gemini-2.5-flash",
   contents: prompt,
   config: {
     responseMimeType: "application/json",
@@ -152,7 +152,7 @@ ${JSON.stringify(analysis, null, 2)}
 `;
 
       const response = await gemini.models.generateContent({
-        model: "gemini-2.5-pro",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: {
             responseMimeType: "application/json",
@@ -195,7 +195,7 @@ ${JSON.stringify(mindmap)}
 `;
 
         const response = await gemini.models.generateContent({
-            model: "gemini-2.5-pro",
+            model: "gemini-2.5-flash",
             contents: prompt,
             config: {
                 responseMimeType: "application/json",
@@ -235,7 +235,7 @@ ${JSON.stringify(presentation)}
 `;
 
       const response = await gemini.models.generateContent({
-          model: "gemini-2.5-pro",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: {
               responseMimeType: "application/json",
