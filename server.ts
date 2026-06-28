@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import multer from "multer";
 // @ts-ignore
-import pdfParse from "pdf-parse";
+import * as pdfParse from "pdf-parse";
 import { GoogleGenAI } from "@google/genai";
 import { createServer as createViteServer } from "vite";
 import fs from "fs/promises";
@@ -37,7 +37,7 @@ async function startServer() {
         return res.status(400).json({ error: "No file uploaded" });
       }
 
-      const pdfData = await pdfParse(req.file.buffer);
+      const data = await pdfParse(buffer);
       const text = pdfData.text;
 
       res.json({ text });
