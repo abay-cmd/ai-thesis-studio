@@ -9,17 +9,17 @@ export async function extractPdfText(buffer: Buffer): Promise<string> {
 
   let text = "";
 
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
 
     const content = await page.getTextContent();
 
     const pageText = content.items
-      .map((item: any) => item.str)
+      .map((item: any) => ("str" in item ? item.str : ""))
       .join(" ");
 
     text += pageText + "\n";
   }
 
-  return text;
+  return text.trim();
 }
