@@ -1,0 +1,13 @@
+api/
+
+extract-pdf.ts
+
+analyze-thesis.ts
+
+generate-mindmap.ts
+
+plan-presentation.ts
+
+generate-defense.ts
+
+health.ts
